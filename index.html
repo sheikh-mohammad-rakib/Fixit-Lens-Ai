@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FixIt Lens AI — Multimodal Hardware & Appliance Diagnostic Studio</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="shortcut icon" href="favicon.svg">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="dark-theme">
+    <!-- Animated Background Glows -->
+    <div class="bg-glow bg-glow-cyan"></div>
+    <div class="bg-glow bg-glow-purple"></div>
+
+    <!-- Top Navbar -->
+    <header class="navbar">
+        <div class="nav-brand">
+            <div class="brand-logo">
+                <i data-lucide="scan-line"></i>
+            </div>
+            <div class="brand-text">
+                <span class="brand-title">FixIt Lens <span class="ai-badge">AI</span></span>
+                <span class="brand-subtitle">Powered by Gemini 3.5 Flash Multimodal</span>
+            </div>
+        </div>
+        <div class="nav-controls">
+            <div class="status-pill">
+                <span class="pulse-dot"></span>
+                <span id="modelStatusText">Gemini 3.5 Flash Ready</span>
+            </div>
+            <button id="themeToggleBtn" class="btn btn-outline" title="Toggle Day / Night Theme">
+                <i data-lucide="sun"></i>
+                <span id="themeToggleText">Day Mode</span>
+            </button>
+            <button id="openConfigBtn" class="btn btn-outline" title="Configure API Key">
+                <i data-lucide="key"></i>
+                <span>API Config</span>
+            </button>
+            <a href="#demoSection" class="btn btn-hackathon">
+                <i data-lucide="trophy"></i>
+                <span>Hackathon Demo Mode</span>
+            </a>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="main-container">
+        <!-- Hero Title Section -->
+        <section class="hero-section">
+            <h1 class="hero-heading">
+                Instant Multimodal <span class="gradient-text">Hardware Diagnostics</span>
+            </h1>
+            <p class="hero-desc">
+                Drop an image or capture your workbench live. FixIt Lens AI analyzes circuits, appliances, and broken machinery to generate interactive step-by-step repair guides and hazard assessments.
+            </p>
+        </section>
+
+        <!-- Hackathon Instant Demo Bar -->
+        <section id="demoSection" class="demo-showcase">
+            <div class="demo-header">
+                <div class="demo-header-title">
+                    <i data-lucide="zap"></i>
+                    <span>Instant Judge Demo Cases (1-Click Evaluation)</span>
+                </div>
+                <span class="demo-hint">Click any card to load a pre-configured multimodal diagnostic sample</span>
+            </div>
+            <div class="demo-cards-grid">
+                <!-- Card 1 -->
+                <div class="demo-card" data-sample="gpu">
+                    <div class="demo-card-icon gpu-icon">
+                        <i data-lucide="cpu"></i>
+                    </div>
+                    <div class="demo-card-content">
+                        <span class="demo-card-category">Electronics & Computing</span>
+                        <h4>Overheating RTX 4090 GPU</h4>
+                        <p>Burnt 12VHPWR power connector pin with thermal throttling symptoms</p>
+                    </div>
+                    <div class="demo-card-action">
+                        <span>Load Sample</span>
+                        <i data-lucide="arrow-right"></i>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="demo-card" data-sample="espresso">
+                    <div class="demo-card-icon espresso-icon">
+                        <i data-lucide="coffee"></i>
+                    </div>
+                    <div class="demo-card-content">
+                        <span class="demo-card-category">Home Appliances</span>
+                        <h4>Commercial Espresso Boiler Leaking</h4>
+                        <p>High-pressure steam leak at brass safety valve & calcified fitting</p>
+                    </div>
+                    <div class="demo-card-action">
+                        <span>Load Sample</span>
+                        <i data-lucide="arrow-right"></i>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="demo-card" data-sample="circuit">
+                    <div class="demo-card-icon circuit-icon">
+                        <i data-lucide="activity"></i>
+                    </div>
+                    <div class="demo-card-content">
+                        <span class="demo-card-category">PCB & Wiring</span>
+                        <h4>Fried Smart Home Controller PCB</h4>
+                        <p>Blown electrolytic capacitor C14 & scorched voltage regulator trace</p>
+                    </div>
+                    <div class="demo-card-action">
+                        <span>Load Sample</span>
+                        <i data-lucide="arrow-right"></i>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Diagnostic Workspace Panel -->
+        <section class="diagnostic-workspace">
+            <!-- Left Column: Visual Capture & Inputs -->
+            <div class="panel input-panel">
+                <div class="panel-header">
+                    <div class="panel-title">
+                        <i data-lucide="camera"></i>
+                        <span>Hardware Visual Inspector</span>
+                    </div>
+                    <div class="panel-actions">
+                        <button id="cameraToggleBtn" class="btn btn-sm btn-ghost">
+                            <i data-lucide="video"></i>
+                            <span>Live Camera</span>
+                        </button>
+                        <button id="clearImageBtn" class="btn btn-sm btn-ghost hidden">
+                            <i data-lucide="trash-2"></i>
+                            <span>Clear</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Camera / Upload Dropzone -->
+                <div id="dropzoneArea" class="dropzone">
+                    <input type="file" id="fileInput" accept="image/*" class="file-input-hidden">
+                    <div id="dropzoneEmpty" class="dropzone-empty">
+                        <div class="dropzone-icon-ring">
+                            <i data-lucide="upload-cloud"></i>
+                        </div>
+                        <h3>Drag & Drop Hardware Image Here</h3>
+                        <p>Supports JPG, PNG, WEBP — or browse from your device</p>
+                        <button id="browseBtn" type="button" class="btn btn-primary btn-sm">Browse Image</button>
+                    </div>
+
+                    <!-- Live Video Preview Container -->
+                    <div id="cameraContainer" class="camera-container hidden">
+                        <video id="cameraVideo" autoplay playsinline></video>
+                        <button id="captureSnapshotBtn" class="btn btn-primary capture-btn">
+                            <i data-lucide="camera"></i>
+                            <span>Capture Snapshot</span>
+                        </button>
+                    </div>
+
+                    <!-- Image Preview Container -->
+                    <div id="imagePreviewContainer" class="image-preview-container hidden">
+                        <img id="imagePreview" alt="Hardware under inspection">
+                        <div id="scannerOverlay" class="scanner-overlay hidden">
+                            <div class="laser-line"></div>
+                            <span class="scanner-tag">GEMINI VISION ANALYZING...</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Real Sample Photos Quick-Test & Download Bar -->
+                <div class="sample-photos-bar">
+                    <span class="sample-photos-label"><i data-lucide="image"></i> Live Test Photos:</span>
+                    <div class="sample-photo-pills">
+                        <div class="sample-photo-pill">
+                            <span>RTX 4090 GPU Port</span>
+                            <button type="button" class="btn-sample-load" data-image="damaged_gpu_connector_1783843865106.png" data-cat="Electronics & Computing" data-symptom="Burnt 12VHPWR power connector pin with thermal throttling symptoms">Load into Scanner</button>
+                            <a href="damaged_gpu_connector_1783843865106.png" download class="btn-sample-dl" title="Download Image"><i data-lucide="download"></i></a>
+                        </div>
+                        <div class="sample-photo-pill">
+                            <span>Smart Home PCB</span>
+                            <button type="button" class="btn-sample-load" data-image="damaged_pcb_board_1783843893756.png" data-cat="PCB & Wiring" data-symptom="Swollen electrolytic capacitor C14 and scorched voltage regulator trace">Load into Scanner</button>
+                            <a href="damaged_pcb_board_1783843893756.png" download class="btn-sample-dl" title="Download Image"><i data-lucide="download"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Category & Symptoms Selector -->
+                <div class="form-section">
+                    <label class="form-label">Equipment Category</label>
+                    <div class="category-pills" id="categoryPills">
+                        <button type="button" class="pill active" data-cat="Electronics & PCB">Electronics & PCB</button>
+                        <button type="button" class="pill" data-cat="Home Appliances">Home Appliances</button>
+                        <button type="button" class="pill" data-cat="HVAC & Plumbing">HVAC & Plumbing</button>
+                        <button type="button" class="pill" data-cat="Automotive & Motors">Automotive</button>
+                        <button type="button" class="pill" data-cat="General Hardware">General Hardware</button>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <label class="form-label" for="symptomInput">Observed Symptoms / User Notes (Optional)</label>
+                    <textarea id="symptomInput" class="symptom-textarea" placeholder="e.g. Device shuts down after 5 minutes under heavy load; faint burning odor near the top connector..."></textarea>
+                </div>
+
+                <!-- Run Diagnostic Button -->
+                <div class="action-footer">
+                    <button id="runDiagnosticBtn" class="btn btn-glow btn-lg w-full">
+                        <i data-lucide="cpu"></i>
+                        <span>Run Gemini Multimodal Diagnosis</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Right Column: Interactive AI Diagnostic Dashboard -->
+            <div class="panel results-panel" id="resultsPanel">
+                <!-- Initial Placeholder View -->
+                <div id="resultsPlaceholder" class="results-placeholder">
+                    <div class="placeholder-hologram">
+                        <i data-lucide="cpu"></i>
+                    </div>
+                    <h3>Waiting for Hardware Scan</h3>
+                    <p>Upload a device photo or select a demo case to generate an instant Gemini 3.5 Flash multimodal repair blueprint.</p>
+                </div>
+
+                <!-- Loading State View -->
+                <div id="resultsLoading" class="results-loading hidden">
+                    <div class="cyber-spinner"></div>
+                    <h4>Gemini Multimodal Reasoning in Progress...</h4>
+                    <p class="loading-status" id="loadingStatusText">Inspecting visual features and circuit traces...</p>
+                </div>
+
+                <!-- Active Results Content -->
+                <div id="resultsContent" class="results-content hidden">
+                    <!-- Top Status Bar: Severity & Overview -->
+                    <div class="diagnostic-scorecard">
+                        <div class="scorecard-header">
+                            <div>
+                                <span class="result-label">DIAGNOSTIC REPORT</span>
+                                <h2 id="deviceTitleText">RTX 4090 Graphics Card</h2>
+                            </div>
+                            <div class="urgency-badge" id="urgencyBadge">
+                                <span class="urgency-indicator"></span>
+                                <span id="urgencyText">MODERATE URGENCY</span>
+                            </div>
+                        </div>
+
+                        <!-- Key Highlights Metrics -->
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <span class="metric-label">Faulty Component</span>
+                                <span class="metric-value" id="faultyComponentText">12VHPWR Power Connector</span>
+                            </div>
+                            <div class="metric-card">
+                                <span class="metric-label">Safety Hazard Level</span>
+                                <span class="metric-value hazard-high" id="hazardLevelText">High (Thermal Melt Risk)</span>
+                            </div>
+                            <div class="metric-card">
+                                <span class="metric-label">Repair vs. Replace</span>
+                                <span class="metric-value" id="repairRecommendationText">Repairable ($25–$45)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Root Cause Box -->
+                    <div class="section-box root-cause-box">
+                        <div class="section-box-header">
+                            <i data-lucide="alert-triangle"></i>
+                            <span>Root Cause Analysis</span>
+                        </div>
+                        <p id="rootCauseText">Detailed AI explanation of the failure mechanism...</p>
+                    </div>
+
+                    <!-- Hands-Free Voice Assistant Controller -->
+                    <div class="voice-assistant-bar">
+                        <div class="voice-info">
+                            <i data-lucide="volume-2"></i>
+                            <div>
+                                <strong>Technician Hands-Free Voice Readout</strong>
+                                <span>Listen to repair steps aloud while working with tools</span>
+                            </div>
+                        </div>
+                        <div class="voice-actions">
+                            <button id="startVoiceBtn" class="btn btn-sm btn-secondary">
+                                <i data-lucide="play"></i>
+                                <span>Speak Guide</span>
+                            </button>
+                            <button id="stopVoiceBtn" class="btn btn-sm btn-ghost hidden">
+                                <i data-lucide="square"></i>
+                                <span>Stop</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Safety & PPE Warnings Box -->
+                    <div class="section-box hazard-box">
+                        <div class="section-box-header hazard-header">
+                            <i data-lucide="shield-alert"></i>
+                            <span>Safety & Required Protective Equipment</span>
+                        </div>
+                        <ul id="safetyWarningsList" class="safety-list">
+                            <!-- Populated dynamically -->
+                        </ul>
+                    </div>
+
+                    <!-- Interactive Step-By-Step Repair Guide -->
+                    <div class="section-box">
+                        <div class="section-box-header justify-between">
+                            <div class="flex items-center gap-2">
+                                <i data-lucide="list-checks"></i>
+                                <span>Interactive Repair Roadmap</span>
+                            </div>
+                            <span class="progress-badge" id="progressBadge">0% Complete</span>
+                        </div>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar-fill" id="progressBarFill" style="width: 0%;"></div>
+                        </div>
+                        <div id="repairStepsContainer" class="repair-steps-container">
+                            <!-- Populated dynamically -->
+                        </div>
+                    </div>
+
+                    <!-- Required Tools Checklist -->
+                    <div class="section-box">
+                        <div class="section-box-header">
+                            <i data-lucide="wrench"></i>
+                            <span>Required Tools & Materials</span>
+                        </div>
+                        <div id="toolsTagsContainer" class="tools-tags">
+                            <!-- Populated dynamically -->
+                        </div>
+                    </div>
+
+                    <!-- Action Export Bar -->
+                    <div class="export-bar">
+                        <button id="exportJsonBtn" class="btn btn-sm btn-outline">
+                            <i data-lucide="download"></i>
+                            <span>Export Structured JSON</span>
+                        </button>
+                        <button id="printReportBtn" class="btn btn-sm btn-outline">
+                            <i data-lucide="printer"></i>
+                            <span>Print Repair Worksheet</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- API Configuration Modal -->
+    <div id="configModal" class="modal-overlay hidden">
+        <div class="modal-card">
+            <div class="modal-header">
+                <div class="flex items-center gap-2">
+                    <i data-lucide="settings"></i>
+                    <h3>Gemini API Configuration</h3>
+                </div>
+                <button id="closeModalBtn" class="btn-icon">
+                    <i data-lucide="x"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p class="modal-desc">
+                    FixIt Lens AI supports direct client-side Gemini 3.5 Flash requests for hackathon demos, or routing through a secure backend proxy (`/api/gemini`).
+                </p>
+
+                <div class="config-tabs">
+                    <button type="button" class="tab-btn active" data-tab="clientTab">Option 1: Direct Gemini API Key (Free Tier)</button>
+                    <button type="button" class="tab-btn" data-tab="proxyTab">Option 2: Serverless Proxy Endpoint</button>
+                </div>
+
+                <!-- Tab 1: Client API Key -->
+                <div id="clientTabContent" class="tab-content active">
+                    <label class="form-label" for="apiKeyInput">Gemini API Key (Google AI Studio)</label>
+                    <input type="password" id="apiKeyInput" class="form-input" placeholder="AIzaSy... (Your free key from aistudio.google.com)">
+                    <span class="form-hint">Your API key is stored securely in browser session storage only.</span>
+                </div>
+
+                <!-- Tab 2: Proxy Endpoint -->
+                <div id="proxyTabContent" class="tab-content hidden">
+                    <label class="form-label" for="proxyUrlInput">Serverless Proxy Endpoint</label>
+                    <input type="text" id="proxyUrlInput" class="form-input" value="/api/gemini" placeholder="e.g. /api/gemini or https://your-proxy.vercel.app/api/gemini">
+                    <span class="form-hint">Routes requests through a secure serverless function (bypasses browser CORS).</span>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="saveConfigBtn" class="btn btn-primary">Save Settings</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Application Script -->
+    <script src="app.js"></script>
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
