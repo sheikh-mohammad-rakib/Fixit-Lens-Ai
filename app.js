@@ -341,7 +341,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     document.querySelectorAll('.demo-card').forEach(card => {
-        card.addEventListener('click', () => {
+        const triggerDemoCard = () => {
             const sampleKey = card.getAttribute('data-sample');
             const data = demoCasesData[sampleKey];
             if (!data) return;
@@ -353,6 +353,13 @@ document.addEventListener('DOMContentLoaded', () => {
             renderDiagnosticResults(data);
             const workspace = document.querySelector('.diagnostic-workspace');
             if (workspace) workspace.scrollIntoView({ behavior: 'smooth' });
+        };
+        card.addEventListener('click', triggerDemoCard);
+        card.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                triggerDemoCard();
+            }
         });
     });
 
