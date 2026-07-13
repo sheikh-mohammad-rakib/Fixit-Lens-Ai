@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const modelStatusText = document.getElementById('modelStatusText');
 
     let activeConfigMode = localStorage.getItem('fixit_config_mode') || 'client';
-    let savedApiKey = localStorage.getItem('fixit_gemini_api_key') || 'AQ.Ab8RN6LliZvaDEIi3FpKtM3w9HVga6xCi8Rx4wfs2BOLzcQ6uA';
+    let savedApiKey = localStorage.getItem('fixit_gemini_api_key') || '';
     let savedProxyUrl = localStorage.getItem('fixit_proxy_url') || '/api/gemini';
 
     if (apiKeyInput) apiKeyInput.value = savedApiKey;
@@ -251,7 +251,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (saveConfigBtn) {
         saveConfigBtn.addEventListener('click', () => {
-            savedApiKey = apiKeyInput.value.trim() || 'AQ.Ab8RN6LliZvaDEIi3FpKtM3w9HVga6xCi8Rx4wfs2BOLzcQ6uA';
+            savedApiKey = apiKeyInput.value.trim() || '';
             savedProxyUrl = proxyUrlInput.value.trim() || '/api/gemini';
             localStorage.setItem('fixit_config_mode', activeConfigMode);
             localStorage.setItem('fixit_gemini_api_key', savedApiKey);
@@ -508,7 +508,8 @@ Return a STRICT JSON object matching exactly this JSON schema:
                         responseJson = await res.json();
                     } catch (proxyError) {
                         console.warn("Serverless proxy endpoint unreachable on static hosting. Automatically using Direct API Key fallback so diagnostic succeeds.", proxyError);
-                        const fallbackKey = savedApiKey || 'AQ.Ab8RN6LliZvaDEIi3FpKtM3w9HVga6xCi8Rx4wfs2BOLzcQ6uA';
+                        const fallbackKey = savedApiKey || '';
+                        if (!fallbackKey) throw new Error("Please configure your Gemini API Key in 'API Config'");
                         const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent?key=${fallbackKey}`;
                         const payload = {
                             contents: [

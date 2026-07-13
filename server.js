@@ -26,7 +26,7 @@ const server = http.createServer(async (req, res) => {
         req.on('data', chunk => { body += chunk; });
         req.on('end', async () => {
             try {
-                const apiKey = process.env.GEMINI_API_KEY || 'AQ.Ab8RN6LliZvaDEIi3FpKtM3w9HVga6xCi8Rx4wfs2BOLzcQ6uA';
+                const apiKey = process.env.GEMINI_API_KEY || '';
                 const data = JSON.parse(body);
 
                 if (!apiKey) {
