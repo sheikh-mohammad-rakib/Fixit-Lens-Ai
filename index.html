@@ -44,6 +44,10 @@
                 <i data-lucide="key"></i>
                 <span>API Config</span>
             </button>
+            <a href="#howItWorksSection" class="btn btn-outline" title="How to Use FixIt Lens AI">
+                <i data-lucide="help-circle"></i>
+                <span>How It Works</span>
+            </a>
             <a href="#demoSection" class="btn btn-hackathon">
                 <i data-lucide="trophy"></i>
                 <span>Hackathon Demo Mode</span>
@@ -61,6 +65,43 @@
             <p class="hero-desc">
                 Drop an image or capture your workbench live. FixIt Lens AI analyzes circuits, appliances, and broken machinery to generate interactive step-by-step repair guides and hazard assessments.
             </p>
+        </section>
+
+        <!-- How It Works Section -->
+        <section id="howItWorksSection" class="how-it-works-section">
+            <div class="how-header">
+                <div class="how-header-title">
+                    <i data-lucide="help-circle"></i>
+                    <span>How FixIt Lens AI Works (4-Step Pipeline)</span>
+                </div>
+                <span class="demo-hint">Interactive Architecture & Workflow Guide</span>
+            </div>
+            <div class="how-steps-grid">
+                <div class="how-step-card">
+                    <div class="how-step-num">01</div>
+                    <div class="how-step-icon"><i data-lucide="camera"></i></div>
+                    <h4>Capture or Upload</h4>
+                    <p>Upload any broken circuit board or appliance photo, or click 'Load into Scanner' on our live engineering sample images.</p>
+                </div>
+                <div class="how-step-card">
+                    <div class="how-step-num">02</div>
+                    <div class="how-step-icon"><i data-lucide="scan"></i></div>
+                    <h4>Gemini 3.5 Flash Vision</h4>
+                    <p>Google's multimodal vision scans high-resolution image tokens to detect scorched pins, blown capacitors, and cracks.</p>
+                </div>
+                <div class="how-step-card">
+                    <div class="how-step-num">03</div>
+                    <div class="how-step-icon"><i data-lucide="shield-alert"></i></div>
+                    <h4>Hazard Classification</h4>
+                    <p>Structured JSON Schema evaluates risk urgency into SAFE, MODERATE, or CRITICAL HAZARD to protect technicians.</p>
+                </div>
+                <div class="how-step-card">
+                    <div class="how-step-num">04</div>
+                    <div class="how-step-icon"><i data-lucide="volume-2"></i></div>
+                    <h4>Voice Assistant Roadmap</h4>
+                    <p>Interactive checkable roadmap tracks your progress while our Hands-Free Voice Assistant reads repair steps aloud.</p>
+                </div>
+            </div>
         </section>
 
         <!-- Hackathon Instant Demo Bar -->

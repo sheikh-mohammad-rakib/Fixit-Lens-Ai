@@ -283,6 +283,96 @@ h1, h2, h3, h4, .brand-title {
     font-size: 1.1rem;
 }
 
+/* How It Works Section */
+.how-it-works-section {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    padding: 1.75rem;
+    margin-bottom: 2.5rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.how-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.how-header-title {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    font-size: 1.1rem;
+}
+
+.how-header-title svg {
+    color: var(--primary);
+}
+
+.how-steps-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.25rem;
+}
+
+.how-step-card {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    border-radius: 14px;
+    padding: 1.35rem;
+    position: relative;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+}
+
+.how-step-card:hover {
+    border-color: var(--primary);
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px -5px rgba(14, 165, 233, 0.15);
+}
+
+.how-step-num {
+    position: absolute;
+    top: 1rem;
+    right: 1.15rem;
+    font-size: 1.5rem;
+    font-weight: 800;
+    font-family: monospace;
+    opacity: 0.15;
+    color: var(--primary);
+}
+
+.how-step-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
+    background: rgba(14, 165, 233, 0.12);
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0.25rem;
+}
+
+.how-step-card h4 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.how-step-card p {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.45;
+}
+
 /* Hackathon Demo Showcase Bar */
 .demo-showcase {
     background: var(--glass-bg);
