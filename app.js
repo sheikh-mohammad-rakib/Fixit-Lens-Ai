@@ -71,6 +71,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let activeConfigMode = localStorage.getItem('fixit_config_mode') || 'client';
     let savedApiKey = localStorage.getItem('fixit_gemini_api_key') || '';
+    if (savedApiKey.startsWith('AQ.Ab8')) {
+        savedApiKey = '';
+        localStorage.removeItem('fixit_gemini_api_key');
+    }
     let savedProxyUrl = localStorage.getItem('fixit_proxy_url') || '/api/gemini';
 
     if (apiKeyInput) apiKeyInput.value = savedApiKey;
@@ -230,6 +234,8 @@ document.addEventListener('DOMContentLoaded', () => {
        3. API Config Modal
        ========================================================================= */
     if (openConfigBtn) openConfigBtn.addEventListener('click', () => configModal.classList.remove('hidden'));
+    const openConfigFromNotice = document.getElementById('openConfigFromNotice');
+    if (openConfigFromNotice) openConfigFromNotice.addEventListener('click', () => configModal.classList.remove('hidden'));
     if (closeModalBtn) closeModalBtn.addEventListener('click', () => configModal.classList.add('hidden'));
 
     tabBtns.forEach(btn => {

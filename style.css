@@ -281,6 +281,43 @@ h1, h2, h3, h4, .brand-title {
 .hero-desc {
     color: var(--text-secondary);
     font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+}
+
+.api-key-notice {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    background: rgba(14, 165, 233, 0.12);
+    border: 1px solid rgba(14, 165, 233, 0.35);
+    color: var(--text-primary);
+    padding: 0.75rem 1.25rem;
+    border-radius: 9999px;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    text-align: left;
+}
+
+.api-key-notice svg {
+    color: var(--primary);
+    flex-shrink: 0;
+}
+
+.notice-link-btn {
+    background: none;
+    border: none;
+    color: var(--primary);
+    font-weight: 700;
+    text-decoration: underline;
+    cursor: pointer;
+    font-size: inherit;
+    padding: 0;
+}
+
+.api-key-notice a {
+    color: var(--primary);
+    font-weight: 700;
+    text-decoration: underline;
 }
 
 /* How It Works Section */
