@@ -1,0 +1,11 @@
+{
+  "name": "fixit-lens-ai",
+  "version": "1.0.0",
+  "description": "FixIt Lens AI — Multimodal Hardware & Appliance Diagnostic Studio powered by Google Gemini 3.5 Flash",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "author": "Code with Gemini API Hackathon Team",
+  "license": "MIT"
+}
